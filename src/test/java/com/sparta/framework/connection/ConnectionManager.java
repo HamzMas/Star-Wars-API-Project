@@ -1,7 +1,45 @@
 package com.sparta.framework.connection;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.sql.SQLOutput;
+
 public class ConnectionManager {
 
-    
+    private static HttpResponse<String> getResponse(Endpoints endpoint){
+        var client = HttpClient.newHttpClient();
+        var request = HttpRequest
+                .newBuilder()
+                .uri(URI.create(endpoint.getUrl()))
+                .build();
+        HttpResponse<String> response = null;
 
+        try{
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public static int getStatusCode(Endpoints endpoint){
+        return getResponse(endpoint).statusCode();
+    }
+    public static String getHeader(String key, Endpoints endpoint){
+        return getResponse(endpoint)
+                .headers()
+                .firstValue(key)
+                .orElse("Key not found");
+    }
+
+    public static void main(String[] args) {
+//        System.out.println(ConnectionManager.getHeader("gender", Endpoints.FILMS));
+        System.out.println(ConnectionManager.getResponse(Endpoints.BASEURL));
+        System.out.println(ConnectionManager.getResponse(Endpoints.BASEURL).body());
+    }
 }
+
