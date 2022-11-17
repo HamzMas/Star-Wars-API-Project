@@ -36,10 +36,5 @@ public class ConnectionManager {
                 .orElse("Key not found");
     }
 
-    public static void main(String[] args) {
-//        System.out.println(ConnectionManager.getHeader("gender", Endpoints.FILMS));
-        System.out.println(ConnectionManager.getResponse(Endpoints.BASEURL));
-        System.out.println(ConnectionManager.getResponse(Endpoints.BASEURL).body());
-    }
 }
 
