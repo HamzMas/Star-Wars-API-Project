@@ -2,19 +2,22 @@ package com.sparta.framework.connection;
 
 public enum Endpoints {
     BASEURL("https://swapi.dev/api/"),
-    FILMS(BASEURL + "films/"),
-    PEOPLE(BASEURL + "people/"),
-    PLANETS(BASEURL + "planets/"),
-    SPECIES(BASEURL + "species/"),
-    STARSHIPS(BASEURL + "starships/"),
-    VEHICLES(BASEURL + "vehicles/");
+    FILMS("https://swapi.dev/api/films/"),
+    PEOPLE("https://swapi.dev/api/people/"),
+    PLANETS("https://swapi.dev/api/planets/"),
+    SPECIES("https://swapi.dev/api/species/"),
+    STARSHIPS("https://swapi.dev/api/starships/"),
+    VEHICLES("https://swapi.dev/api/vehicles/");
 
     private String url;
-    public String getUrl(){
+
+
+    public String getUrl() {
         return url;
     }
 
     Endpoints(String url) {
         this.url = url;
     }
+
 }

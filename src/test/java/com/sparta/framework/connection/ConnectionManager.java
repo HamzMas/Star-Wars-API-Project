@@ -10,6 +10,16 @@ import java.sql.SQLOutput;
 
 public class ConnectionManager {
 
+    public static String getBaseURLConnection(){
+        return Endpoints.BASEURL.getUrl();
+    }
+    public static String getConnection(Endpoints endpoint, String value){
+        return endpoint.getUrl() + "/" + value;
+    }
+    public static String getConnection(Endpoints endpoint, int value){
+        return endpoint.getUrl() + "/" + value;
+    }
+
     private static HttpResponse<String> getResponse(Endpoints endpoint){
         var client = HttpClient.newHttpClient();
         var request = HttpRequest
@@ -36,5 +46,11 @@ public class ConnectionManager {
                 .orElse("Key not found");
     }
 
+    public static void main(String[] args) {
+        System.out.println(ConnectionManager.getHeader("Server", Endpoints.FILMS));
+        System.out.println(ConnectionManager.getResponse(Endpoints.FILMS));
+        System.out.println(ConnectionManager.getResponse(Endpoints.FILMS).body());
+        System.out.println(ConnectionManager.getConnection(Endpoints.FILMS, 1));
+    }
 }
 
