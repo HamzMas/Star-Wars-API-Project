@@ -187,49 +187,18 @@ public class StarshipsDTO {
     public boolean isConsumablesFormatCorrect(){
         String[] splitConsumables = consumables.split(" ");
         if (splitConsumables[0].equals("1")){
-            return splitConsumables[1].equals("week") || splitConsumables[1].equals("month") || splitConsumables[1].equals("year");
+            return splitConsumables[1].equals("day") || splitConsumables[1].equals("week") || splitConsumables[1].equals("month") || splitConsumables[1].equals("year");
         } else {
-            return splitConsumables[1].equals("weeks") || splitConsumables[1].equals("months") || splitConsumables[1].equals("years");
+            return splitConsumables[1].equals("days") || splitConsumables[1].equals("weeks") || splitConsumables[1].equals("months") || splitConsumables[1].equals("years");
         }
-    }
-
-    public boolean checkIfHamcrestReturn200StatusCode(List<String> links){
-        boolean isValid = false;
-        if (links.isEmpty()){
-            System.out.println("There is no link in the list");
-            return true;
-        }
-        for (int i = 0 ; i < links.size() ; i++){
-            isValid = false;
-            System.out.println("Status code of the link " + i + " is " + ConnectionManager.getStatusCode(links.get(i)));
-            if (ConnectionManager.getStatusCode(links.get(i)) == 200){
-                isValid = true;
-            }else {
-                System.out.println("Status code of the link " + i + " is " + ConnectionManager.getStatusCode(links.get(i)));
-            }
-        }
-        return isValid;
-    }
-
-    public boolean checkIfHamcrestReturn200StatusCode(String link){
-        if (ConnectionManager.getStatusCode(link) == 200){
-            System.out.println("Status code of the link is " + ConnectionManager.getStatusCode(link));
-            return true;
-        }
-        System.out.println("Status code of the link is " + ConnectionManager.getStatusCode(link));
-        return false;
-
     }
 
     public boolean isCostNumberLargerThanZero(){
         if (!costInCredits.equals("unknown")){
             return Long.parseLong(costInCredits) > 0;
         }
-        if (costInCredits.equals("unknown")) {
-            System.out.println("Cost in credits is unknown");
-            return true;
-        }
-        return false;
+        System.out.println("Cost in credits is unknown");
+        return true;
 
     }
 
