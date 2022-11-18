@@ -7,7 +7,7 @@ import com.sparta.framework.injector.Injector;
 import org.junit.jupiter.api.*;
 
 
-public class StarshipsTests {
+public class StarshipDTOTest {
     private static StarshipsDTO dto;
     private static int statusCode;
 
