@@ -1,6 +1,8 @@
 package com.sparta.framework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.Date;
 import java.util.List;
 
 public class SpeciesDTO {
@@ -15,10 +17,10 @@ public class SpeciesDTO {
     private String homeworld;
 
     @JsonProperty("edited")
-    private String edited;
+    private Date edited;
 
     @JsonProperty("created")
-    private String created;
+    private Date created;
 
     @JsonProperty("eye_colors")
     private String eyeColors;
@@ -39,7 +41,7 @@ public class SpeciesDTO {
     private String hairColors;
 
     @JsonProperty("average_height")
-    private String averageHeight;
+    private Double averageHeight;
 
     @JsonProperty("name")
     private String name;
@@ -48,7 +50,7 @@ public class SpeciesDTO {
     private String designation;
 
     @JsonProperty("average_lifespan")
-    private String averageLifespan;
+    private Double averageLifespan;
 
     public List<String> getFilms(){
         return films;
@@ -62,11 +64,11 @@ public class SpeciesDTO {
         return homeworld;
     }
 
-    public String getEdited(){
+    public Date getEdited(){
         return edited;
     }
 
-    public String getCreated(){
+    public Date getCreated(){
         return created;
     }
 
@@ -94,7 +96,7 @@ public class SpeciesDTO {
         return hairColors;
     }
 
-    public String getAverageHeight(){
+    public Double getAverageHeight(){
         return averageHeight;
     }
 
@@ -106,7 +108,7 @@ public class SpeciesDTO {
         return designation;
     }
 
-    public String getAverageLifespan(){
+    public Double getAverageLifespan(){
         return averageLifespan;
     }
 
