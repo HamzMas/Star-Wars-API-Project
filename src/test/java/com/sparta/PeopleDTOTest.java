@@ -16,20 +16,21 @@ public class PeopleDTOTest {
     private static PeopleDTO peopleDTO;
 
     private static int statusCode;
+    private static String peopleDTOUrl;
     private static String header;
     private static HttpResponse<String> body;
 
     @BeforeAll
     static void initAll(){
-        peopleDTO = injectPeopleDTO(getConnection(peopleDTO, 5));
-        statusCode = getStatusCode(peopleDTO);
-        header = getHeader("Content-type", peopleDTO);
+        peopleDTO = injectPeopleDTO(getConnection(Endpoints.PEOPLE, 5));
+        statusCode = getStatusCode(Endpoints.PEOPLE);
+        header = getHeader("Content-type", Endpoints.PEOPLE);
     }
 
     @Test
     @DisplayName("Check status code is 200")
     public void checkStatusCodeIs200(){
-        assertEquals(200, getStatusCode(peopleDTO));
+        assertEquals(200, getStatusCode(Endpoints.PEOPLE));
     }
 
     @Nested
