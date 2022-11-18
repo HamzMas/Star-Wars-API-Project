@@ -3,6 +3,7 @@ package com.sparta.framework.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class PeopleDTO {
 
@@ -10,10 +11,10 @@ public class PeopleDTO {
     private String name;
 
     @JsonProperty("height")
-    private String height;
+    private int height;
 
     @JsonProperty("mass")
-    private String mass;
+    private int mass;
 
     @JsonProperty("hair_color")
     private String hairColor;
@@ -25,7 +26,7 @@ public class PeopleDTO {
     private String eyeColor;
 
     @JsonProperty("birth_year")
-    private Date birthYear;
+    private String birthYear;
 
     @JsonProperty("gender")
     private String gender;
@@ -46,10 +47,10 @@ public class PeopleDTO {
     private List<String> starships;
 
     @JsonProperty("created")
-    private String created;
+    private Date created;
 
     @JsonProperty("edited")
-    private String edited;
+    private Date edited;
 
     @JsonProperty("url")
     private String url;
@@ -58,11 +59,11 @@ public class PeopleDTO {
         return name;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public String getMass() {
+    public int getMass() {
         return mass;
     }
 
@@ -78,7 +79,7 @@ public class PeopleDTO {
         return eyeColor;
     }
 
-    public Date getBirthYear() {
+    public String getBirthYear() {
         return birthYear;
     }
 
@@ -106,11 +107,11 @@ public class PeopleDTO {
         return starships;
     }
 
-    public String getCreated() {
+    public Date getCreated() {
         return created;
     }
 
-    public String getEdited() {
+    public Date getEdited() {
         return edited;
     }
 
@@ -139,5 +140,17 @@ public class PeopleDTO {
                         ",name = '" + name + '\'' +
                         ",height = '" + height + '\'' +
                         "}";
+    }
+
+    public boolean hasPositiveMass(){
+        return mass >= 0;
+    }
+
+    public boolean isMaleOrFemale(){
+        return Objects.equals(gender, "male") || Objects.equals(gender, "female");
+    }
+
+    public boolean isBirthYearValid(){
+        return birthYear.contains("BBY")  || gender.contains("ABY");
     }
 }

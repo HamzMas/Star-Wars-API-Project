@@ -1,41 +1,35 @@
 package com.sparta;
 
-import com.sparta.framework.connection.ConnectionManager;
-import com.sparta.framework.connection.Endpoints;
-import com.sparta.framework.dto.FilmsDTO;
-import com.sparta.framework.dto.PeopleDTO;
-import com.sparta.framework.injector.Injector;
-import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.params.shadow.com.univocity.parsers.annotations.Nested;
-
-import java.util.Date;
-
 import static com.sparta.framework.connection.ConnectionManager.*;
-import static com.sparta.framework.injector.Injector.*;
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.*;
+import static com.sparta.framework.injector.Injector.injectPeopleDTO;
+import static org.junit.Assert.*;
+;
+import com.sparta.framework.connection.Endpoints;
+import com.sparta.framework.dto.PeopleDTO;
+import org.junit.jupiter.api.*;
 
+import java.net.http.HttpResponse;
+import java.util.Date;
 
 public class PeopleDTOTest {
 
     private static PeopleDTO peopleDTO;
-    private static FilmsDTO filmsDTO;
+
     private static int statusCode;
+    private static String header;
+    private static HttpResponse<String> body;
 
     @BeforeAll
     static void initAll(){
-        peopleDTO = injectPeopleDTO(getConnection(Endpoints.PEOPLE, 5));
-        statusCode = getStatusCode(Endpoints.PEOPLE);
-        filmsDTO = injectFilmsDTO(getConnection(Endpoints.FILMS, 5));
+        peopleDTO = injectPeopleDTO(getConnection(peopleDTO, 5));
+        statusCode = getStatusCode(peopleDTO);
+        header = getHeader("Content-type", peopleDTO);
     }
 
     @Test
     @DisplayName("Check status code is 200")
     public void checkStatusCodeIs200(){
-        assertEquals(200, getStatusCode(Endpoints.PEOPLE));
+        assertEquals(200, getStatusCode(peopleDTO));
     }
 
     @Nested
@@ -44,12 +38,12 @@ public class PeopleDTOTest {
         @Test
         @DisplayName("Check height is greater than 0")
         public void checkHeightIsAPositiveInteger(){
-        assertTrue(Integer.parseInt(peopleDTO.getHeight()) >= 0);
+            assertTrue(peopleDTO.getHeight() >= 0);
         }
         @Test
         @DisplayName("Check mass is a positive integer")
         void checkMassIsPositiveInteger(){
-        assertTrue(Integer.parseInt(peopleDTO.getMass())>=0);
+            assertTrue(peopleDTO.getMass()>=0);
         }
     }
 
@@ -122,7 +116,7 @@ public class PeopleDTOTest {
 
     @Test
     @DisplayName("Check homeworld contains planet")
-    void checkHomeworldContainsPlanet(){
+    public void checkHomeworldContainsPlanet(){
         assertTrue(peopleDTO.getHomeworld().contains("planet"));
     }
 
@@ -133,14 +127,34 @@ public class PeopleDTOTest {
         @DisplayName("Check a valid date for created is returned")
         void checkValidDateCreated() {
             Date now = new Date();
-            assertTrue(filmsDTO.getCreated().before(now));
+            assertTrue(peopleDTO.getCreated().before(now));
         }
 
         @Test
         @DisplayName("Check a valid date for edited is returned")
         void checkValidDateEdited() {
             Date now = new Date();
-            assertTrue(filmsDTO.getEdited().before(now));
+            assertTrue(peopleDTO.getEdited().before(now));
         }
     }
+
+    @Test
+    @DisplayName("Check gender is male or female")
+    void checkGender(){
+        assertTrue(peopleDTO.isMaleOrFemale());
+    }
+
+    @Test
+    @DisplayName("Check start date contains either ABY or BBY")
+    void checkDateIsValid(){
+        assertTrue(peopleDTO.isBirthYearValid());
+    }
+
+    @Test
+    @DisplayName("Check headers are accurate")
+    void checkHeaders(){
+        assertEquals("application/json", header);
+    }
+
+
 }
