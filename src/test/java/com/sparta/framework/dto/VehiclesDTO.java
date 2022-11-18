@@ -19,7 +19,7 @@ public class VehiclesDTO {
     private int passengers;
 
     @JsonProperty("pilots")
-    private List<Object> pilots;
+    private List<String> pilots;
 
     @JsonProperty("edited")
     private Date edited;
@@ -70,7 +70,7 @@ public class VehiclesDTO {
         return passengers;
     }
 
-    public List<Object> getPilots() {
+    public List<String> getPilots() {
         return pilots;
     }
 
