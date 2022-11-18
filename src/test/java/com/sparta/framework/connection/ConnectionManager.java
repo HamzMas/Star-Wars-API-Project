@@ -39,11 +39,33 @@ public class ConnectionManager {
     public static int getStatusCode(Endpoints endpoint){
         return getResponse(endpoint).statusCode();
     }
+
     public static String getHeader(String key, Endpoints endpoint){
         return getResponse(endpoint)
                 .headers()
                 .firstValue(key)
                 .orElse("Key not found");
     }
+
+    private static HttpResponse<String> getResponse(String url){
+        var client = HttpClient.newHttpClient();
+        var request = HttpRequest
+                .newBuilder()
+                .uri(URI.create(url))
+                .build();
+        HttpResponse<String> response = null;
+
+        try{
+            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
+
+    public static int getStatusCode(String url){
+        return getResponse(url).statusCode();
+    }
+
 }
 
