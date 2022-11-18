@@ -1,9 +1,23 @@
 package com.sparta.framework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sparta.framework.connection.ConnectionManager;
+import io.cucumber.java.sl.In;
+
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Stream;
+
+import static org.junit.Assert.assertTrue;
 
 public class StarshipsDTO {
+    List<StarshipsDTO> dtos = new ArrayList<>();
 
 
     @JsonProperty("max_atmosphering_speed")
@@ -19,22 +33,22 @@ public class StarshipsDTO {
     private String passengers;
 
     @JsonProperty("pilots")
-    private List<Object> pilots;
+    private List<String> pilots;
 
     @JsonProperty("edited")
-    private String edited;
+    private Date edited;
 
     @JsonProperty("consumables")
     private String consumables;
 
     @JsonProperty("MGLT")
-    private String mGLT;
+    private Integer mGLT;
 
     @JsonProperty("created")
-    private String created;
+    private Date created;
 
     @JsonProperty("length")
-    private String length;
+    private Double length;
 
     @JsonProperty("starship_class")
     private String starshipClass;
@@ -49,7 +63,7 @@ public class StarshipsDTO {
     private String crew;
 
     @JsonProperty("hyperdrive_rating")
-    private String hyperdriveRating;
+    private Double hyperdriveRating;
 
     @JsonProperty("cost_in_credits")
     private String costInCredits;
@@ -76,11 +90,11 @@ public class StarshipsDTO {
         return passengers;
     }
 
-    public List<Object> getPilots(){
+    public List<String> getPilots(){
         return pilots;
     }
 
-    public String getEdited(){
+    public Date getEdited(){
         return edited;
     }
 
@@ -88,15 +102,15 @@ public class StarshipsDTO {
         return consumables;
     }
 
-    public String getMGLT(){
+    public Integer getMGLT(){
         return mGLT;
     }
 
-    public String getCreated(){
+    public Date getCreated(){
         return created;
     }
 
-    public String getLength(){
+    public Double getLength(){
         return length;
     }
 
@@ -116,7 +130,7 @@ public class StarshipsDTO {
         return crew;
     }
 
-    public String getHyperdriveRating(){
+    public Double getHyperdriveRating(){
         return hyperdriveRating;
     }
 
@@ -155,6 +169,68 @@ public class StarshipsDTO {
                         ",name = '" + name + '\'' +
                         ",model = '" + model + '\'' +
                         "}";
+    }
+
+
+    public boolean isNumberFormatted(String number){
+        //Check the number uses "," as thousands separators
+        System.out.println("Number of crew:" + crew);
+        return number.matches("\\d{1,3}(,\\d{3})*");
+    }
+
+    public boolean isDateInPast(Date date){
+        Date now = new Date();
+        return date.before(now);
+
+    }
+
+    public boolean isConsumablesFormatCorrect(){
+        String[] splitConsumables = consumables.split(" ");
+        if (splitConsumables[0].equals("1")){
+            return splitConsumables[1].equals("week") || splitConsumables[1].equals("month") || splitConsumables[1].equals("year");
+        } else {
+            return splitConsumables[1].equals("weeks") || splitConsumables[1].equals("months") || splitConsumables[1].equals("years");
+        }
+    }
+
+    public boolean checkIfHamcrestReturn200StatusCode(List<String> links){
+        boolean isValid = false;
+        if (links.isEmpty()){
+            System.out.println("There is no link in the list");
+            return true;
+        }
+        for (int i = 0 ; i < links.size() ; i++){
+            isValid = false;
+            System.out.println("Status code of the link " + i + " is " + ConnectionManager.getStatusCode(links.get(i)));
+            if (ConnectionManager.getStatusCode(links.get(i)) == 200){
+                isValid = true;
+            }else {
+                System.out.println("Status code of the link " + i + " is " + ConnectionManager.getStatusCode(links.get(i)));
+            }
+        }
+        return isValid;
+    }
+
+    public boolean checkIfHamcrestReturn200StatusCode(String link){
+        if (ConnectionManager.getStatusCode(link) == 200){
+            System.out.println("Status code of the link is " + ConnectionManager.getStatusCode(link));
+            return true;
+        }
+        System.out.println("Status code of the link is " + ConnectionManager.getStatusCode(link));
+        return false;
+
+    }
+
+    public boolean isCostNumberLargerThanZero(){
+        if (!costInCredits.equals("unknown")){
+            return Long.parseLong(costInCredits) > 0;
+        }
+        if (costInCredits.equals("unknown")) {
+            System.out.println("Cost in credits is unknown");
+            return true;
+        }
+        return false;
+
     }
 
 
