@@ -4,6 +4,7 @@ import com.sparta.framework.connection.ConnectionManager;
 import com.sparta.framework.connection.Endpoints;
 import com.sparta.framework.dto.SpeciesDTO;
 import com.sparta.framework.injector.Injector;
+import com.sparta.framework.utilities.LinkValidator;
 import org.junit.jupiter.api.*;
 
 import java.util.Date;
@@ -59,6 +60,19 @@ public class SpeciesTest {
         }
     }
 
+    @Nested
+    class NumberMoreThanZero{
+        @Test
+        @DisplayName("Testing Average Height Is More Than 0")
+        void testingAverageHeightIsMoreThan0(){
+            Assertions.assertTrue(speciesDTO.getAverageHeight() > 0);
+        }
+        @Test
+        @DisplayName("Testing Average Lifespan Is More Than 0")
+        void testingAverageLifespanIsMoreThan0(){
+            Assertions.assertTrue(speciesDTO.getAverageLifespan() > 0);
+        }
+    }
 
     @Test
     @DisplayName("Testing Eye Colours")
@@ -97,12 +111,6 @@ public class SpeciesTest {
     }
 
     @Test
-    @DisplayName("Testing Average Height Is More Than 0")
-    void testingAverageHeightIsMoreThan0(){
-        Assertions.assertTrue(speciesDTO.getAverageHeight() > 0);
-    }
-
-    @Test
     @DisplayName("Testing Name")
     void testingName(){
         Assertions.assertNotNull(speciesDTO.getName());
@@ -114,9 +122,19 @@ public class SpeciesTest {
         Assertions.assertNotNull(speciesDTO.getDesignation());
     }
 
-    @Test
-    @DisplayName("Testing Average Lifespan Is More Than 0")
-    void testingAverageLifespanIsMoreThan0(){
-        Assertions.assertTrue(speciesDTO.getAverageLifespan() > 0);
+    @Nested
+    class HateoasChecker{
+        @Test
+        @DisplayName("Check Home World Has Valid Links")
+        void checkHomeWorldHasValidLinks(){
+            Assertions.assertTrue(LinkValidator.checkIfHateoasReturn200StatusCode(speciesDTO.getHomeworld()));
+        }
+        @Test
+        @DisplayName("Check Films Has Valid Links")
+        void checkFilmsHasValidLinks(){
+            Assertions.assertTrue(LinkValidator.checkIfHateoasReturn200StatusCode(speciesDTO.getFilms()));
+        }
+
     }
+
 }
