@@ -1,6 +1,8 @@
 package com.sparta.framework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.sparta.framework.utilities.LinkValidator;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -152,5 +154,13 @@ public class PeopleDTO {
 
     public boolean isBirthYearValid(){
         return birthYear.contains("BBY")  || gender.contains("ABY");
+    }
+
+    public boolean checkStatusCode(String url){
+       return LinkValidator.checkIfHateoasReturn200StatusCode(url);
+    }
+
+    public boolean checkStatusCode(List<String> urls){
+        return LinkValidator.checkIfHateoasReturn200StatusCode(urls);
     }
 }

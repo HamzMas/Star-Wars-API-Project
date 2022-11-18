@@ -158,4 +158,32 @@ public class PeopleDTOTest {
     }
 
 
+    @Nested
+    @DisplayName("Testing Hateoas links")
+    class checkHateoasLinks {
+        @Test
+        @DisplayName("Check status code of species")
+        void checkStatusCodeOfSpecies(){
+            assertTrue( peopleDTO.checkStatusCode(peopleDTO.getSpecies()));
+        }
+
+        @Test
+        @DisplayName("Check status code of films")
+        void checkStatusCodeOfFilms(){
+            assertTrue( peopleDTO.checkStatusCode(peopleDTO.getFilms()));
+        }
+
+        @Test
+        @DisplayName("Check status code of vehicles")
+        void checkStatusCodeOfVehicles(){
+            assertTrue( peopleDTO.checkStatusCode(peopleDTO.getVehicles()));
+        }
+
+        @Test
+        @DisplayName("Check status code of Starships")
+        void checkStatusCodeOfStarships(){
+            assertTrue( peopleDTO.checkStatusCode(peopleDTO.getStarships()));
+        }
+
+    }
 }
