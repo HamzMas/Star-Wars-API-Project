@@ -1,5 +1,11 @@
 package com.sparta.framework.connection;
 
+import com.sparta.framework.dto.PlanetsDTO;
+import com.sparta.framework.injector.Injector;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
@@ -45,5 +51,11 @@ public class ConnectionManager {
                 .firstValue(key)
                 .orElse("Key not found");
     }
+
+
+
+
+
+
 }
 
