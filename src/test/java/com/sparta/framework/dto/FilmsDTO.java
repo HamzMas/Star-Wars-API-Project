@@ -10,7 +10,7 @@ public class FilmsDTO {
     private String title;
 
     @JsonProperty("episode_id")
-    private Integer episodeId;
+    private int episodeId;
 
     @JsonProperty("opening_crawl")
     private String openingCrawl;
@@ -52,7 +52,7 @@ public class FilmsDTO {
         return title;
     }
 
-    public Integer getEpisodeId(){
+    public int getEpisodeId(){
         return episodeId;
     }
 

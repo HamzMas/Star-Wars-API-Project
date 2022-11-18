@@ -2,35 +2,36 @@ package com.sparta.framework.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Date;
 import java.util.List;
 
 public class VehiclesDTO {
     @JsonProperty("max_atmosphering_speed")
-    private String maxAtmospheringSpeed;
+    private int maxAtmospheringSpeed;
 
     @JsonProperty("cargo_capacity")
-    private String cargoCapacity;
+    private int cargoCapacity;
 
     @JsonProperty("films")
     private List<String> films;
 
     @JsonProperty("passengers")
-    private String passengers;
+    private int passengers;
 
     @JsonProperty("pilots")
     private List<Object> pilots;
 
     @JsonProperty("edited")
-    private String edited;
+    private Date edited;
 
     @JsonProperty("consumables")
     private String consumables;
 
     @JsonProperty("created")
-    private String created;
+    private Date created;
 
     @JsonProperty("length")
-    private String length;
+    private double length;
 
     @JsonProperty("url")
     private String url;
@@ -39,13 +40,13 @@ public class VehiclesDTO {
     private String manufacturer;
 
     @JsonProperty("crew")
-    private String crew;
+    private int crew;
 
     @JsonProperty("vehicle_class")
     private String vehicleClass;
 
     @JsonProperty("cost_in_credits")
-    private String costInCredits;
+    private int costInCredits;
 
     @JsonProperty("name")
     private String name;
@@ -53,67 +54,67 @@ public class VehiclesDTO {
     @JsonProperty("model")
     private String model;
 
-    public String getMaxAtmospheringSpeed(){
+    public int getMaxAtmospheringSpeed() {
         return maxAtmospheringSpeed;
     }
 
-    public String getCargoCapacity(){
+    public int getCargoCapacity() {
         return cargoCapacity;
     }
 
-    public List<String> getFilms(){
+    public List<String> getFilms() {
         return films;
     }
 
-    public String getPassengers(){
+    public int getPassengers() {
         return passengers;
     }
 
-    public List<Object> getPilots(){
+    public List<Object> getPilots() {
         return pilots;
     }
 
-    public String getEdited(){
+    public Date getEdited() {
         return edited;
     }
 
-    public String getConsumables(){
+    public String getConsumables() {
         return consumables;
     }
 
-    public String getCreated(){
+    public Date getCreated() {
         return created;
     }
 
-    public String getLength(){
+    public double getLength() {
         return length;
     }
 
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 
-    public String getManufacturer(){
+    public String getManufacturer() {
         return manufacturer;
     }
 
-    public String getCrew(){
+    public int getCrew() {
         return crew;
     }
 
-    public String getVehicleClass(){
+    public String getVehicleClass() {
         return vehicleClass;
     }
 
-    public String getCostInCredits(){
+    public int getCostInCredits() {
         return costInCredits;
     }
 
-    public String getName(){
+    public String getName() {
         return name;
     }
 
-    public String getModel(){
+    public String getModel() {
         return model;
     }
 
