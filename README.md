@@ -51,7 +51,7 @@ The program was organised into 4 different packages:
 * The injector layer contains methods for injecting the API endpoints to their corresponding dto and handling any exceptions thrown in the process.
 * The utilities layer contains a class called linkValidator which contains methods for checking the validity code of Hateoas links such as their status code.
 
-![img_1.png](img_1.png)
+packages.PNG
 ***
 
 ## Purpose
