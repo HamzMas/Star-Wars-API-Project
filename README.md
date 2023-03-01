@@ -2,7 +2,7 @@
 ![java_badge](https://img.shields.io/badge/-Java-lightgrey?style=for-the-badge&logo=appveyor)
 ![maven_badge](https://img.shields.io/badge/-Maven-yellow?style=for-the-badge&logo=appveyor)
 
-**Developed by Hamza, Chung, William, John, Ioannis, Mohamed**
+**Developed by Hamzah, Chung, William, John, Ioannis, Mohamed**
 
 ### **Table Of Contents**
 * [**About Project**](#about-project)
